@@ -3,6 +3,7 @@
 namespace senseibistro\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Factories\Car;
 
 class OrderController extends Controller
 {
@@ -14,7 +15,7 @@ class OrderController extends Controller
 	public function index()
 	{
 		return response()->json([
-				'list' => User::getClient()->list()
+				'list' => Car::getOrder()->list()
 		], 200);
 	}
 	
@@ -27,7 +28,7 @@ class OrderController extends Controller
 	public function show($client)
 	{
 		return response()->json([
-				'item' => User::getClient()->find($client)
+				'item' => Car::getOrder()->find($client)
 		], 200);
 	}
 	
@@ -41,7 +42,21 @@ class OrderController extends Controller
 	{
 		$inputs = $this->request->all();
 		return response()->json([
-				'item' => User::getClient()->save($inputs)
+				'item' => Car::getOrder()->save($inputs)
+		], 200);
+	}
+	
+	/**
+	 * storeWithNestedOrders a newly created resource in storage with nested resources.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function storeWithNestedOrders()
+	{
+		$inputs = $this->request->all();
+		return response()->json([
+				'item' => Car::getOrder()->saveWithNestedOrders($inputs)
 		], 200);
 	}
 	
@@ -56,7 +71,7 @@ class OrderController extends Controller
 	{
 		$inputs = $this->request->all();
 		return response()->json([
-				'item' => User::getClient()->update($client,$inputs)
+				'item' => Car::getOrder()->update($client,$inputs)
 		], 200);
 	}
 	
@@ -69,7 +84,7 @@ class OrderController extends Controller
 	public function destroy($client)
 	{
 		return response()->json([
-				'item' => User::getClient()->delete($client)
+				'item' => Car::getOrder()->delete($client)
 		], 200);
 	}
 }

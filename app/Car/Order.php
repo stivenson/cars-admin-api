@@ -2,6 +2,7 @@
 
 use Abstracts\Resource;
 use Models\Order as MOrder;
+use Models\ItemsOrder;
 
 class Order extends Resource{
 
@@ -38,6 +39,33 @@ class Order extends Resource{
 		$o = new MOrder();
 		$o->fill($attr);
 		return $o->save() ? $o: false;
+	}
+	
+	public function saveWithNestedOrders($attr) {
+		$itemsOrder = $attr['items'];
+		$o = new MOrder();
+		$o->fill($attr);
+		return $this->transactionOrderAndItems($o, $itemsOrder);
+	}
+	
+	private function transactionOrderAndItems($o, $itemsOrder){
+		try {
+			\DB::transaction(function() use ($o, $itemsOrder)
+			{
+				$o->save();
+				foreach ($itemsOrder as $itemorder){
+					$io = new ItemsOrder;
+					$io->products_id = $itemorder->products_id;
+					$io->amount = $itemorder->amount;
+					$io->observations = $itemorder->observations;
+					$io->orders_id = $o->id; 
+					$io->save();
+				}
+			});
+			return true;
+		}catch (Exception $e){
+			return false;
+		}
 	}
 	
 	public function update($id,$attr) {

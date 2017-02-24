@@ -2,6 +2,7 @@
 
 use Abstracts\Resource;
 use Models\User;
+use Hash;
 
 class Client extends Resource {
 
@@ -18,6 +19,8 @@ class Client extends Resource {
 	public function save($attr) {
 		$o = new User();
 		$attr->roles_id = self::ROLE;
+		$password = $attr['password'];
+		$attr['password'] = Hash::make($password);
 		$o->fill($attr);
 		return $o->save() ? $o: false;	
 	}
@@ -25,6 +28,9 @@ class Client extends Resource {
 	public function update($id,$attr) {
 		$o = User::find($id);
 		$attr->roles_id = self::ROLE;
+		$password = $attr['password'];
+		if(trim($password) != '')
+			$attr['password'] = Hash::make($password); 
 		$o->fill($attr);
 		return $o->save() ? $o: false;
 	}
