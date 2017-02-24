@@ -15,7 +15,31 @@ class OrderController extends Controller
 	public function index()
 	{
 		return response()->json([
-				'list' => Car::getOrder()->list()
+				'list' => Car::getOrder()->listStatus()
+		], 200);
+	}
+
+	/**
+	 * Display a listing of the resource with filter of type_delivery.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function indexTypeDelivery($type)
+	{
+		return response()->json([
+				'list' => Car::getOrder()->listTypeDelivery($type)
+		], 200);
+	}
+	
+	/**
+	 * Display a listing of the resource with filter of status.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function indexStatus($type)
+	{
+		return response()->json([
+				'list' => Car::getOrder()->listStatus($type)
 		], 200);
 	}
 	
