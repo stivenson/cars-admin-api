@@ -24,7 +24,11 @@
         "psr-4": {
             "senseibistro\\": "app/",
             "Models\\": "app/Models",
-            "User\\": "app/Users"
+            "Users\\": "app/Users",
+            "Car\\": "app/Car",
+            "Abstracts\\": "app/Abstracts",
+            "Factories\\": "app/Factories",
+            "Helpers\\": "app/Helpers"
         }
     },
     "autoload-dev": {

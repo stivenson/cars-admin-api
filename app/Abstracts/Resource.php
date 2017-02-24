@@ -5,7 +5,7 @@ use Models\Role;
 
 abstract class Resource {
 	
-	public getRole ($idUser){
+	public function getRole ($idUser){
 		$u = User::find($idUser);
 
 		if(is_null($u))
@@ -13,6 +13,9 @@ abstract class Resource {
 		else
 			return Role::find($u->roles_id);
 	}
-
+	
+	abstract public function find($id);
 	abstract public function save($attr);
+	abstract public function update($id,$attr);
+	abstract public function delete($id);
 }

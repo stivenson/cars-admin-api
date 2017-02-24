@@ -9,3 +9,6 @@ Homestead.yaml
 .env
 MR.mwb
 MR.mwb.bak
+.buildpath
+.project
+.settings/
