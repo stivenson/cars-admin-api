@@ -1,6 +1,6 @@
 <?php namespace Car;
 use Helpers\Image;
-use Models\MProduct;
+use Models\Product as MProduct;
 
 class Product {
 	

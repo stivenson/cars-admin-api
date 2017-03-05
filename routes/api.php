@@ -19,7 +19,8 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 });
 */
 
-Route::group(['middleware' => ['auth:api']], function () {
+//Route::group(['middleware' => ['auth:api']], function () {
 	Route::resource('clients', 'ClientController',['except' => ['create', 'edit']]);
 	Route::resource('orders', 'ClientController',['except' => ['create', 'edit']]);
-});
+	Route::resource('products', 'ProductController',['except' => ['create', 'edit']]);
+//});

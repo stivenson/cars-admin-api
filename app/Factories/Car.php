@@ -5,11 +5,11 @@ use Car\Product;
 
 class Car {
 	
-	public function getOrder(){
+	public static function getOrder(){
 		return new Order; 
 	}
 	
-	public function getProduct(){
+	public static function getProduct(){
 		return new Product;
 	}
 }

@@ -11,7 +11,7 @@ class Product extends Model {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'products';
-    protected $fillable = ['name', 'description', 'value', 'iva', 'available'];
+    protected $fillable = ['name', 'description', 'value', 'iva', 'available', 'image1', 'mime'];
 
 
     public function orders() {
