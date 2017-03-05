@@ -14,9 +14,7 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json([
-				'list' => Car::getProduct()->list()
-		], 200);
+		return response()->json(Car::getProduct()->list(), 200);
 	}
 	
 	/**
@@ -27,9 +25,7 @@ class ProductController extends Controller
 	 */
 	public function show($product)
 	{
-		return response()->json([
-				'item' => Car::getProduct()->find($product)
-		], 200);
+		return response()->json(Car::getProduct()->find($product), 200);
 	}
 	
 	/**
@@ -41,9 +37,7 @@ class ProductController extends Controller
 	public function store()
 	{
 		$inputs = $this->request->all();
-		return response()->json([
-				'item' => Car::getProduct()->save($inputs)
-		], 200);
+		return response()->json(Car::getProduct()->save($inputs), 200);
 	}
 	
 	/**
@@ -56,9 +50,7 @@ class ProductController extends Controller
 	public function update($product)
 	{
 		$inputs = $this->request->all();
-		return response()->json([
-				'item' => Car::getProduct()->update($product,$inputs)
-		], 200);
+		return response()->json(Car::getProduct()->update($product,$inputs), 200);
 	}
 	
 	/**
@@ -69,8 +61,6 @@ class ProductController extends Controller
 	 */
 	public function destroy($product)
 	{
-		return response()->json([
-				'item' => Car::getProduct()->delete($product)
-		], 200);
+		return response()->json(Car::getProduct()->delete($product), 200);
 	}
 }
