@@ -20,7 +20,14 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 */
 
 //Route::group(['middleware' => ['auth:api']], function () {
+
+
+	// Special
+	Route::get('/spe/products/available','ProductController@indexAvailable');
+
 	Route::resource('clients', 'ClientController',['except' => ['create', 'edit']]);
 	Route::resource('orders', 'ClientController',['except' => ['create', 'edit']]);
 	Route::resource('products', 'ProductController',['except' => ['create', 'edit']]);
+
+
 //});

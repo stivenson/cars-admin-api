@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \senseibistro\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        'senseibistro\Http\Middleware\AddHeaders',
+        \senseibistro\Http\Middleware\AddHeaders::class
     ];
 
     /**

@@ -14,9 +14,19 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json(Car::getProduct()->list(), 200);
+		return response()->json(Car::getProduct()->list(false), 200);
 	}
 	
+	/**
+	 * Display a listing of the resource with available filter.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function indexAvailable()
+	{
+		return response()->json(Car::getProduct()->list(true), 200);
+	}
+
 	/**
 	 * Display the specified resource.
 	 *

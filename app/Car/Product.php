@@ -6,8 +6,11 @@ class Product {
 	
 	const WIDTH_IMAGE = 300;
 
-	public function list() {
-		return MProduct::orderBy('name')->get();
+	public function list($available) {
+		if($available)
+		 	return MProduct::where('available',1)->orderBy('name')->get();
+		else
+			return MProduct::orderBy('name')->get();
 	}
 	
 	public function find($id) {
