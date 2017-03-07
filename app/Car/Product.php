@@ -6,7 +6,7 @@ class Product {
 	
 	const WIDTH_IMAGE = 300;
 
-	public function list($available) {
+	public function listR($available) {
 		if($available)
 		 	return MProduct::where('available',1)->orderBy('name')->get();
 		else

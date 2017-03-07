@@ -7,9 +7,11 @@
 Homestead.json
 Homestead.yaml
 .env
+.env_local
 MR.mwb
 MR.mwb.bak
 .buildpath
 .project
 .settings/
 sftp-config.json
+composer_local.json

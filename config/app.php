@@ -162,10 +162,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Way\Generators\GeneratorsServiceProvider::class,
-        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
-        'Way\Generators\GeneratorsServiceProvider',
-        'User11001\EloquentModelGenerator\EloquentModelGeneratorProvider',
+        // Way\Generators\GeneratorsServiceProvider::class,
+        // Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+        // 'Way\Generators\GeneratorsServiceProvider',
+        // 'User11001\EloquentModelGenerator\EloquentModelGeneratorProvider',
         /*
          * Package Service Providers...
          */

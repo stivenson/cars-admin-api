@@ -14,7 +14,7 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json(Car::getProduct()->list(false), 200);
+		return response()->json(Car::getProduct()->listR(false), 200);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ class ProductController extends Controller
 	 */
 	public function indexAvailable()
 	{
-		return response()->json(Car::getProduct()->list(true), 200);
+		return response()->json(Car::getProduct()->listR(true), 200);
 	}
 
 	/**
