@@ -18,7 +18,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \senseibistro\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \senseibistro\Http\Middleware\AddHeaders::class
+        \senseibistro\Http\Middleware\AddHeaders::class,
+        \Barryvdh\Cors\HandleCors::class,
     ];
 
     /**
@@ -57,5 +58,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \senseibistro\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
+        'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        'admin' => \senseibistro\Http\Middleware\AdminMiddleware::class,
+        'client' => \senseibistro\Http\Middleware\ClientMiddleware::class,
     ];
 }
