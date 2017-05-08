@@ -27,7 +27,7 @@ class Product {
 			$arrImage = $this->processImage($image);
 			$attr['image1'] = $arrImage[0];
 			$attr['mime'] = $arrImage[1];
-			$attr['available'] = (bool) $attr['available'];
+			$attr['available'] = ($attr['available'] === 'true');
 			$o->fill($attr);
 			return $o->save();			
 		}
@@ -42,7 +42,7 @@ class Product {
 			$attr['image1'] = $arrImage[0];
 			$attr['mime'] = $arrImage[1];
 		}
-		$attr['available'] = (bool) $attr['available'];
+		$attr['available'] = ($attr['available'] === 'true');
 		$o->fill($attr);
 		return $o->save();
 	}

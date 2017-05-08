@@ -179,7 +179,7 @@ return [
         // senseibistro\Providers\BroadcastServiceProvider::class,
         senseibistro\Providers\EventServiceProvider::class,
         senseibistro\Providers\RouteServiceProvider::class,
-        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
+        // 'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
     ],
 
     /*
