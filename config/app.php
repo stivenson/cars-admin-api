@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Senseibistro',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,8 +179,7 @@ return [
         // senseibistro\Providers\BroadcastServiceProvider::class,
         senseibistro\Providers\EventServiceProvider::class,
         senseibistro\Providers\RouteServiceProvider::class,
-        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
-        Barryvdh\Cors\ServiceProvider::class,
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
     ],
 
     /*

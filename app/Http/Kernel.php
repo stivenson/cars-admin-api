@@ -18,8 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \senseibistro\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \senseibistro\Http\Middleware\AddHeaders::class,
-        \Barryvdh\Cors\HandleCors::class,
+        \senseibistro\Http\Middleware\AddHeaders::class
     ];
 
     /**
@@ -34,7 +33,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \senseibistro\Http\Middleware\VerifyCsrfToken::class,
+            //\senseibistro\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -61,6 +60,6 @@ class Kernel extends HttpKernel
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         'admin' => \senseibistro\Http\Middleware\AdminMiddleware::class,
-        'client' => \senseibistro\Http\Middleware\ClientMiddleware::class,
+        'client' => \senseibistro\Http\Middleware\ClientMiddleware::class
     ];
 }

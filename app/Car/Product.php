@@ -8,9 +8,9 @@ class Product {
 
 	public function listR($available) {
 		if($available)
-		 	return MProduct::where('available',1)->orderBy('name')->get();
+		 	return MProduct::where('available',1)->orderBy('id','DESC')->get();
 		else
-			return MProduct::orderBy('name')->get();
+			return MProduct::orderBy('id','DESC')->get();
 	}
 	
 	public function find($id) {
@@ -19,32 +19,43 @@ class Product {
 	}
 	
 	public function save($attr) {
-		$o = new MProduct();
-		$arrImage = $this->processImage($image);
-		$attr['image1'] = $arrImage[0];
-		$attr['mime'] = $arrImage[1];
-		$o->fill($attr);
-		return $o->save() ? $o: false;
+		if(isset($attr['id'])){
+			$this->update($attr['id'],$attr);
+		}else{
+			$o = new MProduct();
+			$image = $attr['image'];
+			$arrImage = $this->processImage($image);
+			$attr['image1'] = $arrImage[0];
+			$attr['mime'] = $arrImage[1];
+			$attr['available'] = (bool) $attr['available'];
+			$o->fill($attr);
+			return $o->save();			
+		}
+
 	}
 	
 	public function update($id,$attr) {
 		$o = MProduct::find($id);
-		$arrImage = $this->processImage($image);
-		$attr['image1'] = $arrImage[0];
-		$attr['mime'] = $arrImage[1];
+		if(isset($attr['image'])){
+			$image = $attr['image'];
+			$arrImage = $this->processImage($image);
+			$attr['image1'] = $arrImage[0];
+			$attr['mime'] = $arrImage[1];
+		}
+		$attr['available'] = (bool) $attr['available'];
 		$o->fill($attr);
-		return $o->save() ? $o: false;
+		return $o->save();
 	}
 	
 	public function delete($id) {
 		$o = MProduct::find($id);
-		$o->delete();
+		return $o->delete();
 	}
 	
 	private function processImage($image) {
 		$mime = Image::getMime($image);
 		$image1 = Image::resizeBase64andScaleHeight(Image::getBase64($image),$mime,self::WIDTH_IMAGE);
-		return [$mime,$image1];
+		return [$image1,$mime];
 	}
 	
 	
