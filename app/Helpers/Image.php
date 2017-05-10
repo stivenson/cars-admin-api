@@ -196,7 +196,7 @@ class Image {
 		$source = imagecreatefromstring(base64_decode($base64img));
 
 		// Resize
-		imagecopyresized($temp_thumb, $source, 0, 0, 0, 0, $newwidth, $newHeight, $width, $width);
+		imagecopyresized($temp_thumb, $source, 0, 0, 0, 0, $newwidth, $newHeight, $width, $height);
 
 
 		switch ($mimeimg) {
