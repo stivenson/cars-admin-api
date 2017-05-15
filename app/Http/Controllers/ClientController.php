@@ -15,9 +15,7 @@ class ClientController extends Controller
 	 */
     public function index() 
     {
-    	return response()->json([
-    			'list' => User::getClient()->list()
-    	], 200);
+    	return response()->json(User::getClient()->list(), 200);
     }
     
     /**
@@ -28,9 +26,7 @@ class ClientController extends Controller
      */
     public function show($client) 
     {
-    	return response()->json([
-    			'item' => User::getClient()->find($client)
-    	], 200);
+    	return response()->json(User::getClient()->find($client), 200);
     }
 
     /**
@@ -42,9 +38,7 @@ class ClientController extends Controller
     public function store() 
     {
     	$inputs = $this->request->all();
-    	return response()->json([
-    			'item' => User::getClient()->save($inputs)
-    	], 200);
+    	return response()->json(User::getClient()->save($inputs), 200);
     }
 
     /**
@@ -57,9 +51,7 @@ class ClientController extends Controller
     public function update($client) 
     {
     	$inputs = $this->request->all();
-    	return response()->json([
-    			'item' => User::getClient()->update($client,$inputs)
-    	], 200);
+    	return response()->json(User::getClient()->update($client,$inputs), 200);
     }
     
     /**
@@ -70,9 +62,7 @@ class ClientController extends Controller
      */
     public function destroy($client) 
     {
-    	return response()->json([
-    			'item' => User::getClient()->delete($client)
-    	], 200);
+    	return response()->json(User::getClient()->delete($client), 200);
     }
     
 }

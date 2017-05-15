@@ -8,7 +8,7 @@ class Client extends Resource {
 
 	const ROLE = 2;
 	public function list() {
-		return User::where('roles_id',self::ROLE)->get();
+		return User::where('roles_id',self::ROLE)->orderBy('id','DESC')->get();
 	}
 	
 	public function find($id) {
@@ -17,12 +17,16 @@ class Client extends Resource {
 	}
 
 	public function save($attr) {
-		$o = new User();
-		$attr->roles_id = self::ROLE;
-		$password = $attr['password'];
-		$attr['password'] = Hash::make($password);
-		$o->fill($attr);
-		return $o->save() ? $o: false;	
+		if(isset($attr['id'])){
+			$this->update($attr['id'],$attr);
+		}else{
+			$o = new User();
+			$attr->roles_id = self::ROLE;
+			$password = $attr['password'];
+			$attr['password'] = Hash::make($password);
+			$o->fill($attr);
+			return $o->save();	
+		}
 	}
 
 	public function update($id,$attr) {
@@ -32,7 +36,7 @@ class Client extends Resource {
 		if(trim($password) != '')
 			$attr['password'] = Hash::make($password); 
 		$o->fill($attr);
-		return $o->save() ? $o: false;
+		return $o->save();
 	}
 	
 	public function delete($id) {
