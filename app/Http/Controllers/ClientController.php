@@ -15,7 +15,7 @@ class ClientController extends Controller
 	 */
     public function index() 
     {
-    	return response()->json(User::getClient()->list(), 200);
+    	return response()->json(User::getClient()->listAll(), 200);
     }
     
     /**
