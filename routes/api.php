@@ -34,16 +34,19 @@ Route::group(['middleware' => ['auth:api']], function () {
 			// resources temporally public
 			Route::resource('products', 'ProductController',['except' => ['create', 'edit']]);
 			Route::resource('clients', 'ClientController',['except' => ['create', 'edit']]);
+			Route::get('clients/order/{select}','ClientController@index');
+			Route::resource('orders', 'ClientController',['except' => ['create', 'edit']]);
 
 			// Temporal for problems with cors ########
 			Route::get('/temporal/delete/products/{product}','ProductController@destroy');
 			Route::get('/temporal/delete/clients/{client}','ClientController@destroy');
+			Route::get('/temporal/delete/orders/{client}','OrderController@destroy');	
 
 			Route::group(['middleware' => ['before' => 'jwt.auth']], function() {
 
 				Route::group(['middleware' => ['admin','client']], function () {
 					// REST resources
-					Route::resource('orders', 'ClientController',['except' => ['create', 'edit']]);
+					// temporal in other position
 					
 				});
 

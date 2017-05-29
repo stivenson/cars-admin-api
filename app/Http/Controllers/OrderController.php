@@ -14,9 +14,7 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
-		return response()->json([
-				'list' => Car::getOrder()->listStatus()
-		], 200);
+		return response()->json(Car::getOrder()->listStatus(), 200);
 	}
 
 	/**
@@ -26,9 +24,7 @@ class OrderController extends Controller
 	 */
 	public function indexTypeDelivery($type)
 	{
-		return response()->json([
-				'list' => Car::getOrder()->listTypeDelivery($type)
-		], 200);
+		return response()->json(Car::getOrder()->listTypeDelivery($type), 200);
 	}
 	
 	/**
@@ -38,9 +34,7 @@ class OrderController extends Controller
 	 */
 	public function indexStatus($type)
 	{
-		return response()->json([
-				'list' => Car::getOrder()->listStatus($type)
-		], 200);
+		return response()->json(Car::getOrder()->listStatus($type), 200);
 	}
 	
 	/**
@@ -51,9 +45,7 @@ class OrderController extends Controller
 	 */
 	public function show($client)
 	{
-		return response()->json([
-				'item' => Car::getOrder()->find($client)
-		], 200);
+		return response()->json(Car::getOrder()->find($client), 200);
 	}
 	
 	/**
@@ -65,9 +57,7 @@ class OrderController extends Controller
 	public function store()
 	{
 		$inputs = $this->request->all();
-		return response()->json([
-				'item' => Car::getOrder()->save($inputs)
-		], 200);
+		return response()->json(Car::getOrder()->save($inputs), 200);
 	}
 	
 	/**
@@ -79,9 +69,7 @@ class OrderController extends Controller
 	public function storeWithNestedOrders()
 	{
 		$inputs = $this->request->all();
-		return response()->json([
-				'item' => Car::getOrder()->saveWithNestedOrders($inputs)
-		], 200);
+		return response()->json(Car::getOrder()->saveWithNestedOrders($inputs), 200);
 	}
 	
 	/**
@@ -94,9 +82,7 @@ class OrderController extends Controller
 	public function update($client)
 	{
 		$inputs = $this->request->all();
-		return response()->json([
-				'item' => Car::getOrder()->update($client,$inputs)
-		], 200);
+		return response()->json(Car::getOrder()->update($client,$inputs), 200);
 	}
 	
 	/**
@@ -107,8 +93,6 @@ class OrderController extends Controller
 	 */
 	public function destroy($client)
 	{
-		return response()->json([
-				'item' => Car::getOrder()->delete($client)
-		], 200);
+		return response()->json(Car::getOrder()->delete($client), 200);
 	}
 }
