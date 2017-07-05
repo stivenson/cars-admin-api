@@ -35,14 +35,16 @@ class Order extends Resource{
 		return !is_null($o) ? $o : false;
 	}
 	
+	/*
 	public function save($attr) {
 		$o = new MOrder();
 		$o->fill($attr);
 		return $o->save() ? $o: false;
 	}
+	*/
 	
-	public function saveWithNestedOrders($attr) {
-		$itemsOrder = $attr['items'];
+	public function save($attr) {
+		$itemsOrder = $attr['items_orders'];
 		$o = new MOrder();
 		$o->fill($attr);
 		return $this->transactionOrderAndItems($o, $itemsOrder);
