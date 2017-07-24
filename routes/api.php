@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 			Route::get('clients/order/{select}','ClientController@index');
 			Route::resource('orders', 'OrderController',['except' => ['create', 'edit']]);
 			
-			Route::get('items_orders/all/{id}','ItemsOrdersController@index');
+			Route::get('items_orders/all/{idOrder}','ItemsOrdersController@index');
 				
 
 			// Temporal for problems with cors ########

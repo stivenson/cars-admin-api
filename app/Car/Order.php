@@ -49,11 +49,7 @@ class Order extends Resource{
     
     public function save($attr) {
         $itemsOrder = $attr['items_orders'];
-
-        if($attr['created_at'] == '--'){
-            unset($attr['created_at']);
-        }
-
+        unset($attr['created_at']);
         $o = new MOrder();
         $o->fill($attr);
         return $this->transactionOrderAndItems($o, $itemsOrder);
