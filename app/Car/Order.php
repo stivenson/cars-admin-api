@@ -11,7 +11,7 @@ class Order extends Resource{
         $items = [];
         $type = (int)$type;
         if($type == 0)
-            $items =  MOrder::all();
+            $items =  MOrder::orderBy('id','DESC')->get();
         else
             $items = MOrder::where('delivery_type',$type)->orderBy('id','DESC')->get();
             
@@ -23,9 +23,9 @@ class Order extends Resource{
         $items = [];
         $type = (int)$type;
         if($type == 0)
-            $items =  MOrder::all();
+            $items =  MOrder::orderBy('id','DESC')->get();
         else
-            $items = MOrder::where('status',$type)->get();
+            $items = MOrder::where('status',$type)->orderBy('id','DESC')->get();
                     
         return $items;
     }
