@@ -13,7 +13,7 @@ class Order extends Resource{
         if($type == 0)
             $items =  MOrder::all();
         else
-            $items = MOrder::where('delivery_type',$type)->get();
+            $items = MOrder::where('delivery_type',$type)->orderBy('id','DESC')->get();
             
         return $items;
     }
@@ -28,6 +28,10 @@ class Order extends Resource{
             $items = MOrder::where('status',$type)->get();
                     
         return $items;
+    }
+
+    public function listItemsOfOrder($id) {
+        return ItemsOrder::where('orders_id',$id)->get();
     }
     
     public function find($id) {
@@ -44,17 +48,27 @@ class Order extends Resource{
     */
     
     public function save($attr) {
-        //var_dump($attr);
         $itemsOrder = $attr['items_orders'];
+
+        if($attr['created_at'] == '--'){
+            unset($attr['created_at']);
+        }
+
         $o = new MOrder();
         $o->fill($attr);
         return $this->transactionOrderAndItems($o, $itemsOrder);
     }
     
-    private function transactionOrderAndItems($o, $itemsOrder){
+    private function transactionOrderAndItems($o, $itemsOrder, $update = false){
+
         try {
-            \DB::transaction(function() use ($o, $itemsOrder)
+            \DB::transaction(function() use ($o, $itemsOrder, $update)
             {
+
+                if($update) {
+                    \DB::table('items_orders')->where('orders_id', $o->id)->delete();
+                }
+
                 $o->save();
                 $arrJson = json_decode($itemsOrder,true);
                 foreach ($arrJson as $itemorder){
@@ -73,13 +87,16 @@ class Order extends Resource{
     }
     
     public function update($id,$attr) {
+        $itemsOrder = $attr['items_orders'];
         $o = MOrder::find($id);
-        $o->fill($attr);
-        return $o->save() ? $o: false;
+        unset($attr['created_at']);
+        $o->fill($attr['created_at']);
+        return $this->transactionOrderAndItems($o, $itemsOrder, true);
     }
     
     public function delete($id) {
         $o = MOrder::find($id);
+        \DB::table('items_orders')->where('orders_id', $o->id)->delete();
         $o->delete();
     }
 }

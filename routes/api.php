@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth:api']], function () {
 			Route::resource('clients', 'ClientController',['except' => ['create', 'edit']]);
 			Route::get('clients/order/{select}','ClientController@index');
 			Route::resource('orders', 'OrderController',['except' => ['create', 'edit']]);
+			
+			Route::get('items_orders/all/{id}','ItemsOrdersController@index');
+				
 
 			// Temporal for problems with cors ########
 			// ACA TENGO UN PROBLEMA con la configuración de los cors pues el put y el delete no funcionan // cuando los llamo desde mithrilm es una configuración faltante en alguna de las dos partes,
