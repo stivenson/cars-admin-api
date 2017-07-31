@@ -48,11 +48,15 @@ class Order extends Resource{
     */
     
     public function save($attr) {
-        $itemsOrder = $attr['items_orders'];
-        unset($attr['created_at']);
-        $o = new MOrder();
-        $o->fill($attr);
-        return $this->transactionOrderAndItems($o, $itemsOrder);
+		if(isset($attr['id'])){
+			$this->update($attr['id'],$attr);
+		}else{
+            $itemsOrder = $attr['items_orders'];
+            unset($attr['created_at']);
+            $o = new MOrder();
+            $o->fill($attr);
+            return $this->transactionOrderAndItems($o, $itemsOrder);			
+		}
     }
     
     private function transactionOrderAndItems($o, $itemsOrder, $update = false){
@@ -86,7 +90,7 @@ class Order extends Resource{
         $itemsOrder = $attr['items_orders'];
         $o = MOrder::find($id);
         unset($attr['created_at']);
-        $o->fill($attr['created_at']);
+        $o->fill($attr);
         return $this->transactionOrderAndItems($o, $itemsOrder, true);
     }
     
