@@ -30,6 +30,17 @@ class Order extends Resource{
         return $items;
     }
 
+    public function listStatusPagination($type = 0, $skip, $take) {
+    
+        $items = [];
+        $type = (int)$type;
+        if($type == 0)
+            $items =  MOrder::orderBy('id','DESC')->skip($skip)->take($take)->get();
+        else
+            $items = MOrder::where('status',$type)->orderBy('id','DESC')->skip($skip)->take($take)->get();
+        return $items;
+    }
+
     public function listItemsOfOrder($id) {
         return ItemsOrder::where('orders_id',$id)->get();
     }

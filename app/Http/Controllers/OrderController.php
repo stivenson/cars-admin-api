@@ -18,6 +18,15 @@ class OrderController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexPagination($skip, $take)
+    {
+        return response()->json(Car::getOrder()->listStatusPagination(0, $skip, $take), 200);
+    }
+    /**
      * Display a listing of the resource with filter of type_delivery.
      *
      * @return \Illuminate\Http\Response
