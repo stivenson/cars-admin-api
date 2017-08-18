@@ -31,7 +31,6 @@ class Product {
 			$o->fill($attr);
 			return $o->save();			
 		}
-
 	}
 	
 	public function update($id,$attr) {
