@@ -30,7 +30,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage (or update).
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -40,6 +40,21 @@ class ClientController extends Controller
     	$inputs = $this->request->all();
     	return response()->json(User::getClient()->save($inputs), 200);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function onlystore() 
+     {
+         $inputs = $this->request->all();
+         if($inputs['id'] == false){
+             return false;
+         }
+         return response()->json(User::getClient()->save($inputs), 200);
+     }
 
     /**
      * Update the specified resource in storage.

@@ -60,7 +60,6 @@ class ProductController extends Controller
 	public function update($product)
 	{
 		$inputs = $this->request->all();
-		var_dump($inputs);
 		return response()->json(Car::getProduct()->update($product,$inputs), 200);
 	}
 	

@@ -58,7 +58,7 @@ class OrderController extends Controller
     }
     
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage (and update).
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -69,6 +69,20 @@ class OrderController extends Controller
         return response()->json(Car::getOrder()->save($inputs), 200);
     }
     
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function onlystore()
+     {
+        $inputs = $this->request->all();
+        if($inputs['id'] == false){
+            return false;
+        }
+        return response()->json(Car::getOrder()->save($inputs), 200);
+     }
     /**
      * Update the specified resource in storage.
      *
