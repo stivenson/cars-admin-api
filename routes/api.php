@@ -32,29 +32,29 @@ Route::group(['middleware' => ['auth:api']], function () {
 			Route::get('/spe/products/available','ProductController@indexAvailable');
 			// logout 
 			Route::get('/public/logout','SessionController@invalidateToken');
-			Route::get('/public/products/{product}','products.show','ProductController@show');
-			Route::post('/public/clients','clients.store', 'ClientController@onlystore'); //save				
+			Route::get('/public/products/{product}', 'ProductController@show');
+			Route::post('/public/clients', 'ClientController@onlystore'); //save				
 			// login 
 			Route::post('/public/login','SessionController@getToken');	// for post: email, password
 
-			Route::group(['middleware' => ['before' => 'jwt.auth']], function() {
+			Route::group(['middleware' => ['before' => ['jwt.auth','jwt.refresh']]], function() {
 
 				Route::group(['middleware' => ['admin']], function () {
 					
-					Route::get('/clients', 'clients.index', 'ClientController@index');
-					Route::post('/clients','clients.store', 'ClientController@store'); //save or update
-					Route::get('/clients/{client}','clients.show','ClientController@show');
+					Route::get('/clients', 'ClientController@index');
+					Route::post('/clients', 'ClientController@store'); //save or update
+					Route::get('/clients/{client}','ClientController@show');
 					Route::get('/temporal/delete/clients/{client}','ClientController@destroy');
 					
-					Route::get('/orders', 'orders.index', 'OrderController@index');
-					Route::post('/orders','orders.store', 'OrderController@store'); //save or update
-					Route::get('/orders/{order}','orders.show','OrderController@show');
+					Route::get('/orders', 'OrderController@index');
+					Route::post('/orders', 'OrderController@store'); //save or update
+					Route::get('/orders/{order}','OrderController@show');
 					Route::get('/temporal/delete/orders/{client}','OrderController@destroy');	
 					Route::get('pagination_orders/{skip}/{take}','OrderController@indexPagination');
 					
-					Route::get('/products', 'products.index', 'ProductController@index');
-					Route::post('/products','products.store', 'ProductController@store'); //save or update
-					Route::get('/products/{product}','products.show','ProductController@show');										
+					Route::get('/products', 'ProductController@index');
+					Route::post('/products', 'ProductController@store'); //save or update
+					Route::get('/products/{product}', 'ProductController@show');										
 					Route::get('/temporal/delete/products/{product}','ProductController@destroy');
 
 					Route::get('items_orders/all/{idOrder}','ItemsOrdersController@index');					
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 				Route::group(['middleware' => ['client']], function () {							
 					
-					Route::post('/orders','orders.store', 'OrderController@onlystore'); // save or update
+					Route::post('/orders', 'OrderController@onlystore'); // save
 					
 				});					
 

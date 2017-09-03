@@ -179,7 +179,7 @@ return [
         // senseibistro\Providers\BroadcastServiceProvider::class,
         senseibistro\Providers\EventServiceProvider::class,
         senseibistro\Providers\RouteServiceProvider::class,
-        // 'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
     ],
 
     /*
@@ -228,8 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth'
-
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class
     ],
 
 ];

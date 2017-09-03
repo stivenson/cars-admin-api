@@ -1,4 +1,5 @@
 <?php
+namespace senseibistro\Http\Controllers;
 
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -14,7 +15,7 @@ class SessionController extends Controller {
  
         // grab credentials from the request
         $credentials = $this->request->only('email', 'password');
-        
+    
         try {
             // attempt to verify the credentials and create a token for the current user
             if (!$token = JWTAuth::attempt($credentials)) {
@@ -26,7 +27,12 @@ class SessionController extends Controller {
         }
         
         // all good, return the token
-        return response()->json(compact('token'));
+        $user = \Auth::user();
+        unset($user->password);
+        return response()->json([
+            'user' => $user, 
+            compact('token')
+        ]);
         
     }
 
