@@ -29,10 +29,12 @@ class SessionController extends Controller {
         // all good, return the token
         $user = \Auth::user();
         unset($user->password);
-        return response()->json([
-            'user' => $user, 
-            compact('token')
-        ]);
+
+        $res = compact('token');
+
+        $res['user'] = $user; 
+
+        return response()->json($res);
         
     }
 
