@@ -37,9 +37,13 @@ Route::group(['middleware' => ['auth:api']], function () {
 			// login 
 			Route::post('/public/login','SessionController@getToken');	// for post: email, password
 
-			Route::group(['middleware' => ['before' => ['jwt.auth','jwt.refresh']]], function() {
+			// refresh
+			Route::get('/public/refresh', 'SessionController@refreshToken');
+			
 
-				Route::group(['middleware' => ['admin']], function () {
+			Route::group(['middleware' => ['before' => 'jwt.auth']], function() {
+
+				Route::group(['middleware' => 'admin'], function () {
 					
 					Route::get('/clients', 'ClientController@index');
 					Route::post('/clients', 'ClientController@store'); //save or update
@@ -61,7 +65,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 					
 				});
 
-				Route::group(['middleware' => ['client']], function () {							
+				Route::group(['middleware' => 'client'], function () {							
 					
 					Route::post('/orders', 'OrderController@onlystore'); // save
 					

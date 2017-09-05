@@ -15,7 +15,7 @@ class ClientMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( \Auth::user() != null && \Auth::user()->type == "Client" ){
+        if( \Auth::user() != null && \Auth::user()->roles_id == 2 ){
             return $next($request);
         }
 
