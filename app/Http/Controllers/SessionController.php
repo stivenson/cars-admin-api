@@ -53,11 +53,11 @@ class SessionController extends Controller {
      * this return string with new jwt token (manual refresh)
      * @return String
      */
-     private function refreshToken() {
+     public function refreshToken() {
         try{
-            return JWTAuth::refresh(JWTAuth::getToken());
+            return ['token' => JWTAuth::refresh(JWTAuth::getToken())];
         }catch(TokenInvalidException $e){
-            return false;
+            return ['token' => false];
         }
     }
 }
