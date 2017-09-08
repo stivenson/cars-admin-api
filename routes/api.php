@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 			// refresh
 			Route::get('/public/refresh', 'SessionController@refreshToken');
 			
+			// public check of token
+			Route::get('/public/check', 'SessionController@checkToken');			
 
 			Route::group(['middleware' => ['before' => 'jwt.auth']], function() {
 

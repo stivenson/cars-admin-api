@@ -12,7 +12,6 @@ class SessionController extends Controller {
      * @return String
      */
     public function getToken() {
- 
         // grab credentials from the request
         $credentials = $this->request->only('email', 'password');
     
@@ -34,8 +33,7 @@ class SessionController extends Controller {
 
         $res['user'] = $user; 
 
-        return response()->json($res);
-        
+        return response()->json($res);   
     }
 
     /**
@@ -53,11 +51,24 @@ class SessionController extends Controller {
      * this return string with new jwt token (manual refresh)
      * @return String
      */
-     public function refreshToken() {
+    public function refreshToken() {
         try{
             return ['token' => JWTAuth::refresh(JWTAuth::getToken())];
         }catch(TokenInvalidException $e){
             return ['token' => false];
+        }
+    }
+
+    public function checkToken() {
+        try {
+            JWTAuth::parseToken()->authenticate();
+            return ['token' => 'active' ];
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return ['token' => 'expired' ];      
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return ['token' => 'invalid' ];            
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return ['token' => 'not_present' ];                  
         }
     }
 }
