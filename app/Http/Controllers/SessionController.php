@@ -44,7 +44,7 @@ class SessionController extends Controller {
         try {
             JWTAuth::invalidate(JWTAuth::getToken());            
         } catch(Exception $e){}
-        return true;
+        return $this->checkToken();
     }
 
     /**
