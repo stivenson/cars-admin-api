@@ -50,9 +50,7 @@ class ClientController extends Controller
      public function onlystore() 
      {
          $inputs = $this->request->all();
-         if($inputs['id'] == false){
-             return false;
-         }
+         unset($inputs['id']);
          return response()->json(User::getClient()->save($inputs), 200);
      }
 
