@@ -29,7 +29,9 @@ Route::group(['middleware' => ['auth:api']], function () {
 		Route::group(['middleware' => ['web']], function () {
 
 			/// public endpoints
-			Route::get('/spe/products/available','ProductController@indexAvailable');
+			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
+			// Route::get('/spe/products/available','ProductController@indexAvailable');
+			
 			// logout 
 			Route::get('/public/logout','SessionController@invalidateToken');
 			Route::get('/public/products/{product}', 'ProductController@show');

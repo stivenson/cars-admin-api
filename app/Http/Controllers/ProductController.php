@@ -17,6 +17,17 @@ class ProductController extends Controller
 		return response()->json(Car::getProduct()->listR(false), 200);
 	}
 	
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	 public function indexPagination($skip, $take)
+	 {
+		 return response()->json(Car::getProduct()->listRPagination(true, $skip, $take), 200);
+	 }
+
+
 	/**
 	 * Display a listing of the resource with available filter.
 	 *
