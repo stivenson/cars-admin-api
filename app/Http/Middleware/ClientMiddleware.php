@@ -15,10 +15,10 @@ class ClientMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( \Auth::user() != null && \Auth::user()->roles_id == 2 ){
+        if( \Auth::user() != null && (\Auth::user()->roles_id == 2 || \Auth::user()->roles_id == 1) ){
             return $next($request);
         }
 
-        return redirect('/login_user');
+        return response()->json('Not authorized', 401);
     }
 }
