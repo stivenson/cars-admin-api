@@ -13,9 +13,9 @@ class ClientController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-    public function index($select = false) 
+    public function index($select = false, $withAdmins = 'no') 
     {   
-    	return response()->json(User::getClient()->listAll($select), 200); 
+    	return response()->json(User::getClient()->listAll($select, $withAdmins), 200); 
     }
     
     /**

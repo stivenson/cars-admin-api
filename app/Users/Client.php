@@ -7,7 +7,7 @@ use Hash;
 class Client extends Resource {
 
     const ROLE = 2;
-    public function listAll($select) {
+    public function listAll($select, $withAdmins) {
         if($select){
             $orderparam = 'name'; 
             $order = 'ASC';
@@ -15,7 +15,11 @@ class Client extends Resource {
             $orderparam = 'id'; 
             $order = 'DESC';
         }
-        return User::where('roles_id',self::ROLE)->orderBy($orderparam,$order)->get();
+
+        if($withAdmins != 'no')
+            return User::orderBy($orderparam, $order)->get();
+        else
+            return User::where('roles_id',self::ROLE)->orderBy($orderparam, $order)->get();
     }
     
     public function find($id) {

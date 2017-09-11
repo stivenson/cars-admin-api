@@ -14,6 +14,8 @@ class SessionController extends Controller {
     public function getToken() {
         // grab credentials from the request
         $credentials = $this->request->only('email', 'password');
+        
+        $all = $this->request->all();
     
         try {
             // attempt to verify the credentials and create a token for the current user
@@ -33,6 +35,14 @@ class SessionController extends Controller {
 
         $res['user'] = $user; 
 
+        if(isset($all['isclient']) && \Auth::user()->roles_id == 1){
+            return response()->json('not_role', 401);
+        }
+
+        if(!isset($all['isclient']) && \Auth::user()->roles_id == 2){
+            return response()->json('not_role', 401);
+        }
+
         return response()->json($res);   
     }
 
@@ -42,9 +52,10 @@ class SessionController extends Controller {
      */
     public function invalidateToken() {
         try {
-            JWTAuth::invalidate(JWTAuth::getToken());            
+            JWTAuth::invalidate(JWTAuth::getToken());    
+            return $this->checkToken();        
         } catch(Exception $e){}
-        return $this->checkToken();
+        return true;
     }
 
     /**

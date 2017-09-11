@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 					
 					Route::get('/clients', 'ClientController@index');
 					Route::post('/clients', 'ClientController@store'); //save or update
+					Route::get('/clients/order/{select}/{withAdmins}', 'ClientController@index');
 					Route::get('/clients/{client}','ClientController@show');
 					Route::get('/temporal/delete/clients/{client}','ClientController@destroy');
 					
@@ -71,7 +72,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 				Route::group(['middleware' => 'client'], function () {							
 					
-					Route::post('/orders', 'OrderController@onlystore'); // save
+					Route::post('client/orders', 'OrderController@onlystore'); // save
 					
 				});					
 
