@@ -28,19 +28,36 @@ class Client extends Resource {
     }
 
     public function save($attr) {
-        if(isset($attr['id'])){
-            $this->update($attr['id'],$attr);
-        }else{
-            $o = new User();
-            $attr['roles_id'] = self::ROLE;
-            $password = $attr['password'];
-            $attr['password'] = Hash::make($password);
-            $o->fill($attr);
-            return $o->save();  
+            if(isset($attr['id'])){
+                $this->update($attr['id'],$attr);
+            }else{
+                if($this->checkEmail($attr['email'])){
+                    return 'email_invalid';
+                }
+                $o = new User();
+                $attr['roles_id'] = self::ROLE;
+                $password = $attr['password'];
+                $attr['password'] = Hash::make($password);
+                $o->fill($attr);
+                return $o->save();  
+            }
+    }
+
+    private function checkEmail($email, $omitId = false){
+        if($omitId == false){
+            $count = User::where('email', $email)->count();
+        } else {
+            $count = User::where('email', $email)->where('id', '!=', $omitId)->count();            
         }
+        return $count > 0;
     }
 
     public function update($id,$attr) {
+
+        if($this->checkEmail($attr['email'], $id)){
+            return 'email_invalid';
+        }
+
         $o = User::find($id);
         $attr['roles_id'] = self::ROLE;
         $password = $attr['password'];
