@@ -59,11 +59,12 @@ class Order extends Resource{
     */
     
     public function save($attr) {
+        date_default_timezone_set('america/bogota');
 		if(isset($attr['id'])){
 			$this->update($attr['id'],$attr);
 		}else{
             $itemsOrder = $attr['items_orders'];
-            unset($attr['created_at']);
+            $attr['created_at'] = date('Y-m-d H:i:s');
             $o = new MOrder();
             $o->fill($attr);
             return $this->transactionOrderAndItems($o, $itemsOrder);			
@@ -101,6 +102,7 @@ class Order extends Resource{
         $itemsOrder = $attr['items_orders'];
         $o = MOrder::find($id);
         unset($attr['created_at']);
+        // $attr['created_at'] = date('Y-m-d H:i:s');
         $o->fill($attr);
         return $this->transactionOrderAndItems($o, $itemsOrder, true);
     }
