@@ -20,17 +20,19 @@
 */
 
 // TEMPORARY CORS FIX
-//header('Access-Control-Allow-Origin: *');
-//header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-//header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'); // allow certain headers
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+// header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'); // allow certain headers
+header('Access-Control-Allow-Headers: Authorization, Content-Type'); // allow certain headers
 
 require __DIR__.'/../bootstrap/autoload.php';
 
+/*
 header("Access-Control-Allow-Credentials", "true");
-header("Access-Control-Allow-Origin:*");
-header("Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers:Authorization, Origin, Content-Disposition, Content-Type, X-Auth-Token");
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Authorization, Host, Referer,Origin, Content-Disposition, Content-Type, X-Auth-Token");
+*/
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights
