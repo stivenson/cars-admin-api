@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => senseibistro\User::class,
+        'model' => carsadmin\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

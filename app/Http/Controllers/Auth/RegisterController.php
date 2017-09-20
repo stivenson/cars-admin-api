@@ -1,9 +1,9 @@
 <?php
 
-namespace senseibistro\Http\Controllers\Auth;
+namespace carsadmin\Http\Controllers\Auth;
 
-use senseibistro\User;
-use senseibistro\Http\Controllers\Controller;
+use carsadmin\User;
+use carsadmin\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

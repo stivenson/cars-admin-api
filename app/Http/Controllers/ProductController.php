@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Controllers;
+namespace carsadmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Factories\Car;  

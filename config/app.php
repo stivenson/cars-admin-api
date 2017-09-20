@@ -174,11 +174,11 @@ return [
         /*
          * Application Service Providers...
          */
-        senseibistro\Providers\AppServiceProvider::class,
-        senseibistro\Providers\AuthServiceProvider::class,
-        // senseibistro\Providers\BroadcastServiceProvider::class,
-        senseibistro\Providers\EventServiceProvider::class,
-        senseibistro\Providers\RouteServiceProvider::class,
+        carsadmin\Providers\AppServiceProvider::class,
+        carsadmin\Providers\AuthServiceProvider::class,
+        // carsadmin\Providers\BroadcastServiceProvider::class,
+        carsadmin\Providers\EventServiceProvider::class,
+        carsadmin\Providers\RouteServiceProvider::class,
         'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
     ],
 

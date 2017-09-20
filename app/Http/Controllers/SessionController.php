@@ -1,5 +1,5 @@
 <?php
-namespace senseibistro\Http\Controllers;
+namespace carsadmin\Http\Controllers;
 
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;

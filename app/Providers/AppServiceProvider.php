@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Providers;
+namespace carsadmin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

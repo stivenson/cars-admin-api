@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Middleware;
+namespace carsadmin\Http\Middleware;
 
 use Closure;
 use Auth;

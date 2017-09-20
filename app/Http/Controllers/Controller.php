@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Controllers;
+namespace carsadmin\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
