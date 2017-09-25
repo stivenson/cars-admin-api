@@ -31,11 +31,16 @@ Route::group(['middleware' => ['auth:api']], function () {
 			/// public endpoints
 			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
 			// Route::get('/spe/products/available','ProductController@indexAvailable');
-			
+
+
 			// logout 
 			Route::get('/public/logout','SessionController@invalidateToken');
+
 			Route::get('/public/products/{product}', 'ProductController@show');
-			Route::post('/public/clients', 'ClientController@onlystore'); //save				
+			Route::post('/public/clients', 'ClientController@onlystore'); //save
+			Route::get('/public/clients/{userIdFacebook}','ClientController@showWithIdFacebook'); // get some fields
+			Route::post('client/orders', 'OrderController@onlystore'); // save
+			
 			// login 
 			Route::post('/public/login','SessionController@getToken');	// for post: email, password
 
@@ -68,13 +73,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 					Route::get('items_orders/all/{idOrder}','ItemsOrdersController@index');					
 					
-				});
-
-				Route::group(['middleware' => 'client'], function () {							
-					
-					Route::post('client/orders', 'OrderController@onlystore'); // save
-					
-				});					
+				});				
 
 			});
 

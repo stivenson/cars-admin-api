@@ -3,6 +3,7 @@
 use Abstracts\Resource;
 use Models\Order as MOrder;
 use Models\ItemsOrder;
+use Users\Client;
 
 class Order extends Resource{
 
@@ -65,7 +66,9 @@ class Order extends Resource{
 		}else{
             $itemsOrder = $attr['items_orders'];
             $attr['created_at'] = date('Y-m-d H:i:s');
-            $o = new MOrder();
+            $o = new MOrder;
+            $user = new Client;
+            $attr['users_id'] = $user->updateOrSaveforIdFacebook($attr);
             $o->fill($attr);
             return $this->transactionOrderAndItems($o, $itemsOrder);			
 		}

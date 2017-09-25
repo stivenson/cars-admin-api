@@ -27,6 +27,37 @@ class Client extends Resource {
         return !is_null($o) ? $o : false;
     }
 
+    public function findByIdFacebook($userIdFacebook) {
+        $o = User::where('userIdFacebook',$userIdFacebook)->count();
+        if($o > 0){
+            $data = User::where('userIdFacebook',$userIdFacebook)->first();
+            unset($data->password);
+            unset($data->roles_id);
+            unset($data->id);
+            unset($data->name);
+            unset($data->userIdFacebook);
+            return $data;
+        }else{
+            return false;
+        }
+    }
+
+    public function updateOrSaveforIdFacebook($params) {
+        $userIdFacebook = $params['userIdFacebook'];
+        $o = User::where('userIdFacebook',$userIdFacebook)->count();
+        $params['roles_id'] = self::ROLE;
+        if($o > 0){
+            $user = User::where('userIdFacebook',$userIdFacebook)->first();
+            unset($params['userIdFacebook']);
+        }else{
+            $user = new User();
+        }
+
+        $user->fill($params);
+        $user->save();
+        return $user->id;
+    }
+
     public function save($attr) {
             if(isset($attr['id'])){
                 $this->update($attr['id'],$attr);

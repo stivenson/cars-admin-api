@@ -30,6 +30,17 @@ class ClientController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function showWithIdFacebook($userIdFacebook) 
+     {
+         return response()->json(User::getClient()->findByIdFacebook($userIdFacebook), 200);
+     }
+
+    /**
      * Store a newly created resource in storage (or update).
      *
      * @param  \Illuminate\Http\Request  $request
