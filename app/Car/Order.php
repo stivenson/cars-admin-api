@@ -68,7 +68,10 @@ class Order extends Resource{
             $attr['created_at'] = date('Y-m-d H:i:s');
             $o = new MOrder;
             $user = new Client;
-            $attr['users_id'] = $user->updateOrSaveforIdFacebook($attr);
+
+            if(array_key_exists('userIdFacebook',$attr)){
+                $attr['users_id'] = $user->updateOrSaveforIdFacebook($attr);
+            }
             $o->fill($attr);
             return $this->transactionOrderAndItems($o, $itemsOrder);			
 		}
