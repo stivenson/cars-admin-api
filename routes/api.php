@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 			/// public endpoints
 			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
 			// Route::get('/spe/products/available','ProductController@indexAvailable');
-
+			Route::get('/public/share/product/facebook/{product}', 'ProductController@shareFacebook');
 
 			// logout 
 			Route::get('/public/logout','SessionController@invalidateToken');

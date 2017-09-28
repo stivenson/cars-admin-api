@@ -84,4 +84,12 @@ class ProductController extends Controller
 	{
 		return response()->json(Car::getProduct()->delete($product), 200);
 	}
+
+	public function shareFacebook($product) 
+	{
+		return \View::make('product-share-facebook')->with([
+			'title' => 'a title',
+			'description' => 'a description'
+		]);
+	}
 }
