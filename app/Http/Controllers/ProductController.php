@@ -87,9 +87,13 @@ class ProductController extends Controller
 
 	public function shareFacebook($product) 
 	{
-		return \View::make('product-share-facebook')->with([
-			'title' => 'a title',
-			'description' => 'a description'
-		]);
+		$withLink = true;
+		return \View::make('product-share-facebook')->with(Car::getProduct()->getProductForFacebookWith($product, ['name', 'description'], $withLink));
+	}
+
+	public function shareImageFacebook($product){
+		$withLink = false;
+		$array = Car::getProduct()->getProductForFacebookWith($product, ['image1', 'mime'], $withLink);
+		return response($array['image1'], 200)->header('Content-Type', 'image/'.$array['mime']);
 	}
 }

@@ -1,9 +1,9 @@
 <html>
     <head>
             <meta property="og:type"          content="article" />
-            <meta property="og:title"         content="{{$title}}" />
+            <meta property="og:title"         content="{{$name}}" />
             <meta property="og:description"   content="{{$description}}" />
-            <meta property="og:image"         content="https://cdn-images-1.medium.com/fit/c/200/200/0*T1emX6aGUzOE2GOJ.jpg" />
+            <meta property="og:image"         content="{{$linkImage}}" />
     </head>
     <body>
         (page of share with facebook)
