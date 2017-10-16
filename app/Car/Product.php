@@ -8,7 +8,8 @@ class Product {
 	
 	const WIDTH_IMAGE = 300;
 	const END_POINT_IMAGE_SHARE_F = '/public/share/image_product/facebook';
-	
+	const END_POINT_SHARE_F = '/public/share/product/facebook';
+
 	public function listR($available) {
 		if($available)
 		 	return MProduct::where('available',1)->orderBy('id','DESC')->get();
@@ -74,7 +75,9 @@ class Product {
 
 		if($withLink){
 			$linkImage = env('APP_URL').(env('API_PORT') == '' ? '' : ':'.env('API_PORT') ).env('API_URL').self::END_POINT_IMAGE_SHARE_F.'/'.$id;
+			$linkShare = env('APP_URL').(env('API_PORT') == '' ? '' : ':'.env('API_PORT') ).env('API_URL').self::END_POINT_SHARE_F.'/'.$id;
 			$res['linkImage'] = $linkImage;
+			$res['linkShare'] = $linkShare;
 		}
 
 		if(isset($res['image1'])){
