@@ -22,9 +22,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	 public function indexPagination($skip, $take)
+	 public function indexPagination($skip, $take, $category = 0)
 	 {
-		 return response()->json(Car::getProduct()->listRPagination(true, $skip, $take), 200);
+		 return response()->json(Car::getProduct()->listRPagination(true, $skip, $take, $category), 200);
 	 }
 
 

@@ -11,9 +11,9 @@ class Product extends Model {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'products';
-    protected $fillable = ['name', 'description', 'value', 'iva', 'available', 'image1', 'mime'];
+    protected $fillable = ['name', 'description', 'value', 'iva', 'available', 'image1', 'mime', 'category_id'];
 
-
+    
     public function orders() {
         return $this->belongsToMany(Model\Order::class, 'items_orders', 'products_id', 'orders_id');
     }

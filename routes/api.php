@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 		Route::group(['middleware' => ['web']], function () {
 
 			/// public endpoints
+			Route::get('/spe/products/available/pagination_products/{skip}/{take}/{category}','ProductController@indexPagination');
 			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
 			// Route::get('/spe/products/available','ProductController@indexAvailable');
 			
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 					Route::post('/orders', 'OrderController@store'); //save or update
 					Route::get('/orders/{order}','OrderController@show');
 					Route::get('/temporal/delete/orders/{client}','OrderController@destroy');	
+					Route::get('pagination_orders/{skip}/{take}/{category}','OrderController@indexPagination');
 					Route::get('pagination_orders/{skip}/{take}','OrderController@indexPagination');
 					
 					Route::get('/products', 'ProductController@index');

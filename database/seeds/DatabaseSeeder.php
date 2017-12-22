@@ -42,6 +42,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Cliente'
         ]);
 
+        DB::table('categories')->insert([
+            'id' => 1,
+            'name' => 'Sushi'
+        ]);
+
+        DB::table('categories')->insert([
+            'id' => 2,
+            'name' => 'Ensaladas'
+        ]);
+
+        DB::table('categories')->insert([
+            'id' => 3,
+            'name' => 'Menú de hoy'
+        ]);
+
         DB::table('users')->insert([
         	'id' => 1,
             'name' => str_random(10),
@@ -71,7 +86,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
         	'id' => 3,
             'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'email' => 'admin@senseibistro.com',
             'password' => Hash::make('123456'),
 			'roles_id' => 1,
 			'cell_phone' => str_random(10), 
@@ -84,6 +99,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
         	'id' => 1,
 			'name' => str_random(8),
+            'category_id' => 1,
 			'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
 			'value' => $this->int_random(5), 
 			'iva' => '16',
@@ -95,6 +111,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
         	'id' => 2,
 			'name' =>  str_random(4),
+            'category_id' => 3,
 			'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
 			'value' => $this->int_random(6), 
 			'iva' => '0',
@@ -105,6 +122,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
         	'id' => 3,
 			'name' =>  str_random(4),
+            'category_id' => 2,
 			'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
 			'value' => $this->int_random(5), 
 			'iva' => '0',
@@ -115,6 +133,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
         	'id' => 4,
 			'name' => str_random(4),
+            'category_id' => 1,
 			'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
 			'value' => $this->int_random(5), 
 			'iva' => '0',
@@ -129,6 +148,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
             'id' => 5,
             'name' => str_random(8),
+            'category_id' => 1,
             'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
             'value' => $this->int_random(5), 
             'iva' => '16',
@@ -140,6 +160,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
             'id' => 6,
             'name' =>  str_random(4),
+            'category_id' => 1,
             'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
             'value' => $this->int_random(6), 
             'iva' => '0',
@@ -150,6 +171,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
             'id' => 7,
             'name' =>  str_random(4),
+            'category_id' => 1,
             'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
             'value' => $this->int_random(5), 
             'iva' => '0',
@@ -160,6 +182,7 @@ class DatabaseSeeder extends Seeder
         DB::table('products')->insert([
             'id' => 8,
             'name' => str_random(4),
+            'category_id' => 3,
             'description' => 'Lorem '.str_random(8).' ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
             'value' => $this->int_random(5), 
             'iva' => '0',

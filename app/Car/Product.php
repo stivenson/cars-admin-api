@@ -13,14 +13,22 @@ class Product {
 			return MProduct::orderBy('id','DESC')->get();
 	}
 
-    public function listRPagination($available, $skip = false, $take = false) {
+    public function listRPagination($available, $skip = false, $take = false, $category = 0) {
 		if(!$skip && !$take){
+
 			$this->listR($available);
+
 		}else{
+
+			$query = MProduct::orderBy('id','DESC')->skip($skip)->take($take);
+
 			if($available)
-				return MProduct::where('available',1)->orderBy('id','DESC')->skip($skip)->take($take)->get();
-   			else
-				return MProduct::orderBy('id','DESC')->skip($skip)->take($take)->get();
+				$query = $query->orderBy('id', 'DESC');
+
+			if($category != 0)
+				$query = $query->where('category_id', $category);
+
+			return $query->get();
 		}
     }
 	
