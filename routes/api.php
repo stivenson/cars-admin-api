@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 			/// public endpoints
 			Route::get('/spe/products/available/pagination_products/{skip}/{take}/{category}','ProductController@indexPagination');
 			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
+			Route::get('/tools/current_hour','UtilsController@getCurrentHour');
 			// Route::get('/spe/products/available','ProductController@indexAvailable');
 			
 			// logout 
