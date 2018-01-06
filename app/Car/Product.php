@@ -1,10 +1,14 @@
-<?php namespace Car;
+<?php 
+declare(strict_types=1);
+namespace Car;
 use Helpers\Image;
 use Models\Product as MProduct;
 
 class Product {
 	
 	const WIDTH_IMAGE = 300;
+	const END_POINT_IMAGE_SHARE_F = '/public/share/image_product/facebook';
+	const END_POINT_SHARE_F = '/public/share/product/facebook';
 
 	public function listR($available) {
 		if($available)
@@ -12,6 +16,17 @@ class Product {
 		else
 			return MProduct::orderBy('id','DESC')->get();
 	}
+
+    public function listRPagination($available, $skip = false, $take = false) {
+		if(!$skip && !$take){
+			$this->listR($available);
+		}else{
+			if($available)
+				return MProduct::where('available',1)->orderBy('id','DESC')->skip($skip)->take($take)->get();
+   			else
+				return MProduct::orderBy('id','DESC')->skip($skip)->take($take)->get();
+		}
+    }
 	
 	public function find($id) {
 		$o = MProduct::find($id);
@@ -49,6 +64,27 @@ class Product {
 	public function delete($id) {
 		$o = MProduct::find($id);
 		return $o->delete();
+	}
+	
+
+	public function getProductForFacebookWith(int $id, array $fields, bool $withLink) : array {
+
+		$dbProduct = MProduct::where('id',$id)->first($fields);
+
+		$res = array_combine($fields, array_values(json_decode(json_encode($dbProduct), true)));
+
+		if($withLink){
+			$linkImage = env('APP_URL').(env('API_PORT') == '' ? '' : ':'.env('API_PORT') ).env('API_URL').self::END_POINT_IMAGE_SHARE_F.'/'.$id;
+			$linkShare = env('APP_URL').(env('API_PORT') == '' ? '' : ':'.env('API_PORT') ).env('API_URL').self::END_POINT_SHARE_F.'/'.$id;
+			$res['linkImage'] = $linkImage;
+			$res['linkShare'] = $linkShare;
+		}
+
+		if(isset($res['image1'])){
+			$res['image1'] = base64_decode($res['image1']);
+		}
+
+		return $res;
 	}
 	
 	private function processImage($image) {

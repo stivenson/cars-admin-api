@@ -3,6 +3,7 @@
 use Abstracts\Resource;
 use Models\Order as MOrder;
 use Models\ItemsOrder;
+use Users\Client;
 
 class Order extends Resource{
 
@@ -59,12 +60,18 @@ class Order extends Resource{
     */
     
     public function save($attr) {
+        date_default_timezone_set('america/bogota');
 		if(isset($attr['id'])){
 			$this->update($attr['id'],$attr);
 		}else{
             $itemsOrder = $attr['items_orders'];
-            unset($attr['created_at']);
-            $o = new MOrder();
+            $attr['created_at'] = date('Y-m-d H:i:s');
+            $o = new MOrder;
+            $user = new Client;
+
+            if(array_key_exists('userIdFacebook',$attr)){
+                $attr['users_id'] = $user->updateOrSaveforIdFacebook($attr);
+            }
             $o->fill($attr);
             return $this->transactionOrderAndItems($o, $itemsOrder);			
 		}
@@ -101,6 +108,7 @@ class Order extends Resource{
         $itemsOrder = $attr['items_orders'];
         $o = MOrder::find($id);
         unset($attr['created_at']);
+        // $attr['created_at'] = date('Y-m-d H:i:s');
         $o->fill($attr);
         return $this->transactionOrderAndItems($o, $itemsOrder, true);
     }

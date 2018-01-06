@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(senseibistro\User::class, function (Faker\Generator $faker) {
+$factory->define(carsadmin\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

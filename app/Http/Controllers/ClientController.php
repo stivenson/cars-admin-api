@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Controllers;
+namespace carsadmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Factories\User;
@@ -13,9 +13,9 @@ class ClientController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-    public function index($select = false) 
+    public function index($select = false, $withAdmins = 'no') 
     {   
-    	return response()->json(User::getClient()->listAll($select), 200); 
+    	return response()->json(User::getClient()->listAll($select, $withAdmins), 200); 
     }
     
     /**
@@ -30,7 +30,18 @@ class ClientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function showWithIdFacebook($userIdFacebook) 
+     {
+         return response()->json(User::getClient()->findByIdFacebook($userIdFacebook), 200);
+     }
+
+    /**
+     * Store a newly created resource in storage (or update).
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -40,6 +51,19 @@ class ClientController extends Controller
     	$inputs = $this->request->all();
     	return response()->json(User::getClient()->save($inputs), 200);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function onlystore() 
+     {
+         $inputs = $this->request->all();
+         unset($inputs['id']);
+         return response()->json(User::getClient()->save($inputs), 200);
+     }
 
     /**
      * Update the specified resource in storage.

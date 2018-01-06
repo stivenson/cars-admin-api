@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Middleware;
+namespace carsadmin\Http\Middleware;
 
 use Closure;
 
@@ -15,10 +15,10 @@ class ClientMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( \Auth::user() != null && \Auth::user()->type == "Client" ){
+        if( \Auth::user() != null && \Auth::user()->roles_id == 2 ){
             return $next($request);
         }
 
-        return redirect('/login_user');
+        return response()->json('Not authorized', 401);
     }
 }

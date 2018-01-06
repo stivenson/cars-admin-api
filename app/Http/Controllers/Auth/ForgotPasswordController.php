@@ -1,8 +1,8 @@
 <?php
 
-namespace senseibistro\Http\Controllers\Auth;
+namespace carsadmin\Http\Controllers\Auth;
 
-use senseibistro\Http\Controllers\Controller;
+use carsadmin\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

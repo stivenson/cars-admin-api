@@ -28,36 +28,56 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 		Route::group(['middleware' => ['web']], function () {
 
-			// public endpoints
-			Route::get('/spe/products/available','ProductController@indexAvailable');
+			/// public endpoints
+			Route::get('/spe/products/available/pagination_products/{skip}/{take}','ProductController@indexPagination');
+			// Route::get('/spe/products/available','ProductController@indexAvailable');
+			Route::get('/public/share/product/facebook/{product}', 'ProductController@shareFacebook');
+			Route::get('/public/share/image_product/facebook/{product}', 'ProductController@shareImageFacebook');
 
-			// resources temporally public
-			Route::resource('products', 'ProductController',['except' => ['create', 'edit']]);
-			Route::resource('clients', 'ClientController',['except' => ['create', 'edit']]);
-			Route::get('clients/order/{select}','ClientController@index');
-			Route::resource('orders', 'OrderController',['except' => ['create', 'edit']]);
+			// logout 
+			Route::get('/public/logout','SessionController@invalidateToken');
+
+			Route::get('/public/products/{product}', 'ProductController@show');
+			Route::post('/public/clients', 'ClientController@onlystore'); //save
+			Route::get('/public/clients/{userIdFacebook}','ClientController@showWithIdFacebook'); // get some fields
+			Route::post('client/orders', 'OrderController@onlystore'); // save
 			
-			Route::get('pagination_orders/{skip}/{take}','OrderController@indexPagination');
-			Route::get('items_orders/all/{idOrder}','ItemsOrdersController@index');
+			// login 
+			Route::post('/public/login','SessionController@getToken');	// for post: email, password
 
-			// Temporal for problems with cors ########
-			// ACA TENGO UN PROBLEMA con la configuración de los cors pues el put y el delete no funcionan // cuando los llamo desde mithrilm es una configuración faltante en alguna de las dos partes,
-			// api o cliente web.
-
-			Route::get('/temporal/delete/products/{product}','ProductController@destroy');
-			Route::get('/temporal/delete/clients/{client}','ClientController@destroy');
-			Route::get('/temporal/delete/orders/{client}','OrderController@destroy');	
+			// refresh
+			Route::get('/public/refresh', 'SessionController@refreshToken');
+			
+			// public check of token
+			Route::get('/public/check', 'SessionController@checkToken');			
 
 			Route::group(['middleware' => ['before' => 'jwt.auth']], function() {
 
-				Route::group(['middleware' => ['admin','client']], function () {
-					// REST resources
-					// 
-					// TEMPORALMENTE los endpoints que deberían estar restringidos a estos roles, están publicos para facilitar el desarrollo pues todavía no se ha terminado el login del admin, donde el mismo inicio sesión, ni de la vista publica del carrito en donde el usuario inicia sesión.
+				Route::group(['middleware' => 'admin'], function () {
 					
-				});
+					Route::get('/clients', 'ClientController@index');
+					Route::post('/clients', 'ClientController@store'); //save or update
+					Route::get('/clients/order/{select}/{withAdmins}', 'ClientController@index');
+					Route::get('/clients/{client}','ClientController@show');
+					Route::get('/temporal/delete/clients/{client}','ClientController@destroy');
+					
+					Route::get('/orders', 'OrderController@index');
+					Route::post('/orders', 'OrderController@store'); //save or update
+					Route::get('/orders/{order}','OrderController@show');
+					Route::get('/temporal/delete/orders/{client}','OrderController@destroy');	
+					Route::get('pagination_orders/{skip}/{take}','OrderController@indexPagination');
+					
+					Route::get('/products', 'ProductController@index');
+					Route::post('/products', 'ProductController@store'); //save or update
+					Route::get('/products/{product}', 'ProductController@show');										
+					Route::get('/temporal/delete/products/{product}','ProductController@destroy');
+
+					Route::get('items_orders/all/{idOrder}','ItemsOrdersController@index');					
+					
+				});				
 
 			});
+
 		});
 
 	});

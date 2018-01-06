@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Http\Controllers;
+namespace carsadmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Factories\Car;
@@ -58,7 +58,7 @@ class OrderController extends Controller
     }
     
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage (and update).
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -69,6 +69,18 @@ class OrderController extends Controller
         return response()->json(Car::getOrder()->save($inputs), 200);
     }
     
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function onlystore()
+     {
+        $inputs = $this->request->all();
+        unset($inputs['id']);
+        return response()->json(Car::getOrder()->save($inputs), 200);
+     }
     /**
      * Update the specified resource in storage.
      *

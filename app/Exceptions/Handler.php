@@ -1,6 +1,6 @@
 <?php
 
-namespace senseibistro\Exceptions;
+namespace carsadmin\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

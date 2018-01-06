@@ -1,9 +1,9 @@
 <?php
 
-namespace senseibistro\Http\Middleware;
+namespace carsadmin\Http\Middleware;
 
 use Closure;
-
+use Auth;
 class AdminMiddleware
 {
     /**
@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( \Auth::user() != null && \Auth::user()->type == "Admin" ){
+        if( Auth::user() != null && Auth::user()->roles_id == 1 ){
             return $next($request);
         }
 

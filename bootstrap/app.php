@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    senseibistro\Http\Kernel::class
+    carsadmin\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    senseibistro\Console\Kernel::class
+    carsadmin\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    senseibistro\Exceptions\Handler::class
+    carsadmin\Exceptions\Handler::class
 );
 
 /*
